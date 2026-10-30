@@ -61,7 +61,7 @@ func (h *Helm) loadRemoteChart(ctx context.Context, cfg *config.ChartConfig) (*c
 	if err != nil {
 		return nil, err
 	}
-	isRange, err := isVersionRange(cfg.Version)
+	isRange, err := isVersionRange(cfg.ChartVersion())
 	if err != nil {
 		return nil, err
 	}

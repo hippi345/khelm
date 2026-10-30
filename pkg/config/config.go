@@ -93,9 +93,23 @@ type LoaderConfig struct {
 	Repository      string `yaml:"repository,omitempty"`
 	Chart           string `yaml:"chart"`
 	Version         string `yaml:"version,omitempty"`
+	Devel           bool   `yaml:"devel,omitempty"`
 	Verify          bool   `yaml:"verify,omitempty"`
 	Keyring         string `yaml:"keyring,omitempty"`
 	ReplaceLockFile bool   `yaml:"replaceLockFile,omitempty"`
+}
+
+// ChartVersion returns the semver constraint or version used to locate a chart in a repository.
+// When Devel is true and Version is empty this returns ">0.0.0-0", matching helm install --devel.
+func (cfg *LoaderConfig) ChartVersion() string {
+	version := strings.TrimSpace(cfg.Version)
+	if version != "" {
+		return version
+	}
+	if cfg.Devel {
+		return ">0.0.0-0"
+	}
+	return ""
 }
 
 // RendererConfig defines the configuration to render a chart

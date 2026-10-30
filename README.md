@@ -210,6 +210,7 @@ It exposes a `Helm` struct that provides a `Render()` function that returns the 
 | ----- | ---------- | ----------- |
 | `chart` | ARGUMENT    | Chart file (if `repository` not set) or name. |
 | `version` | `--version` | Chart version. Latest version is used if not specified. |
+| `devel` | `--devel` | Use development versions, too. Equivalent to version `>0.0.0-0`. If `version` is set, this is ignored. |
 | `repository` | `--repo` | URL to the repository the chart should be loaded from. |
 | `valueFiles` | `-f` | Locations of values files.
 | `values` | `--set` | Set values object or in CLI `key1=val1,key2=val2`. |

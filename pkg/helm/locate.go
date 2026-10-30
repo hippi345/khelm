@@ -23,7 +23,7 @@ import (
 // with efficient caching)
 func locateChart(ctx context.Context, cfg *config.LoaderConfig, repos repositoryConfig, settings *cli.EnvSettings, getters getter.Providers) (string, error) {
 	name := strings.TrimSpace(cfg.Chart)
-	version := strings.TrimSpace(cfg.Version)
+	version := cfg.ChartVersion()
 	digest := "none"
 	chartURL := name
 
@@ -46,7 +46,7 @@ func locateChart(ctx context.Context, cfg *config.LoaderConfig, repos repository
 			return "", err
 		}
 
-		cv, err := repos.ResolveChartVersion(ctx, name, cfg.Version, repoEntry.URL)
+		cv, err := repos.ResolveChartVersion(ctx, name, version, repoEntry.URL)
 		if err != nil {
 			return "", err
 		}
